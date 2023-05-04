@@ -127,7 +127,7 @@ def getScore(currProbs, queryProbs, err, hint):
         else:
             differences += abs(currProbs[i] - queryProbs[i]) + loss(currProbs[i], 0.1)
 
-    return differences
+    return (differences ** 2)
 
 # loss —— 
 #   Inputs a specific query i as well as the associated hint for that query
@@ -136,6 +136,6 @@ def getScore(currProbs, queryProbs, err, hint):
 
 def loss(q_i, hint):
     if q_i != hint:
-        return 1000 * (abs(q_i - hint))
+        return 1000 * ((q_i - hint) ** 2)
     else:
         return 0
