@@ -73,8 +73,7 @@ def applyInvariants(candidates, domain):
 
 # reconstructDB —— 
 #   Inputs almost identical values as reconstruct() (see above). 
-#   For one-way marginals.
-#   How 
+#   For one-way marginals (currently).
 #   Outputs the best candidate.
 
 def reconstructDB(candidates, domain, queries, hint_dict):
@@ -117,10 +116,8 @@ def reconstructDB(candidates, domain, queries, hint_dict):
         
     return candidates[minIndex]
 
-# functionName —— 
-#   Inputs  
-#   How 
-#   Outputs 
+# getScore —— 
+#   Determines our query values for a given candidate.
 
 def getScore(currProbs, queryProbs, err, hint):
     differences = 0
@@ -132,13 +129,13 @@ def getScore(currProbs, queryProbs, err, hint):
 
     return differences
 
-# functionName —— 
-#   Inputs  
-#   How 
-#   Outputs 
+# loss —— 
+#   Inputs a specific query i as well as the associated hint for that query
+#   Utilizes our specified loss function 
+#   Outputs the loss of that candidate dataset with respect to our hint.
 
 def loss(q_i, hint):
     if q_i != hint:
-        return 1000
+        return 1000 * (abs(q_i - hint))
     else:
         return 0
