@@ -120,14 +120,14 @@ def reconstructDB(candidates, domain, queries, hint_dict):
 #   Determines our query values for a given candidate.
 
 def getScore(currProbs, queryProbs, err, hint):
-    differences = 0
+    sqddifferences = 0
     for i in range(len(currProbs)):
         if hint[i] == -1:
-            differences += abs(currProbs[i] - queryProbs[i])
+            sqddifferences += abs(currProbs[i] - queryProbs[i]) ** 2
         else:
-            differences += abs(currProbs[i] - queryProbs[i]) + loss(currProbs[i], 0.1)
+            sqddifferences += abs(currProbs[i] - queryProbs[i]) ** 2 + loss(currProbs[i], 0.1)
 
-    return (differences ** 2)
+    return sqddifferences
 
 # loss —— 
 #   Inputs a specific query i as well as the associated hint for that query
@@ -136,6 +136,6 @@ def getScore(currProbs, queryProbs, err, hint):
 
 def loss(q_i, hint):
     if q_i != hint:
-        return 1000 * ((q_i - hint) ** 2)
+        return 1024 * ((q_i - hint) ** 2)
     else:
         return 0
