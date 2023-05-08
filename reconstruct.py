@@ -123,19 +123,8 @@ def getScore(currProbs, queryProbs, err, hint):
     sqddifferences = 0
     for i in range(len(currProbs)):
         if hint[i] == -1:
-            sqddifferences += abs(currProbs[i] - queryProbs[i]) ** 2
+            sqddifferences += (currProbs[i] - queryProbs[i]) ** 2
         else:
-            sqddifferences += abs(currProbs[i] - queryProbs[i]) ** 2 + loss(currProbs[i], 0.1)
-
+            sqddifferences += (currProbs[i] - queryProbs[i]) ** 2 + 1024 * ((currProbs[i] - hint[i]) ** 2)
     return sqddifferences
 
-# loss —— 
-#   Inputs a specific query i as well as the associated hint for that query
-#   Utilizes our specified loss function 
-#   Outputs the loss of that candidate dataset with respect to our hint.
-
-def loss(q_i, hint):
-    if q_i != hint:
-        return 1024 * ((q_i - hint) ** 2)
-    else:
-        return 0
