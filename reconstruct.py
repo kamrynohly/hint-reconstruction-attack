@@ -117,7 +117,7 @@ def reconstructDB(candidates, domain, queries, hint_dict):
     return candidates[minIndex]
 
 # getScore —— 
-#   Determines our query values for a given candidate.
+#   Determines the loss/score of a given candidate.
 
 def getScore(currProbs, queryProbs, err, hint):
     sqddifferences = 0
